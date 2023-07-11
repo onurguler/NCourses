@@ -1,6 +1,6 @@
 namespace NCourses.Shared.Dtos;
 
-public class NoContentResponseDto
+public class NoContentResponse
 {
     
 }
