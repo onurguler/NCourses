@@ -13,10 +13,10 @@ public class CatalogMapping : Profile
         CreateMap<Category, CategoryDto>();
         CreateMap<Feature, FeatureDto>().ReverseMap();
         
-        CreateMap<CourseCreateDto, CourseDto>();
-        CreateMap<CourseUpdateDto, CourseDto>();
+        CreateMap<CourseCreateDto, Course>();
+        CreateMap<CourseUpdateDto, Course>();
         
-        CreateMap<CategoryCreateDto, CategoryDto>();
-        CreateMap<CategoryUpdateDto, CategoryDto>();
+        CreateMap<CategoryCreateDto, Category>();
+        CreateMap<CategoryUpdateDto, Category>();
     }
 }
