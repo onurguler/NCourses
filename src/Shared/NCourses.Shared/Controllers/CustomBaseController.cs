@@ -4,7 +4,7 @@ using NCourses.Shared.Dtos;
 
 namespace NCourses.Shared.Controllers;
 
-public class CustomBaseController : ControllerBase
+public abstract class CustomBaseController : ControllerBase
 {
     public IActionResult CreateActionResultInstance<T>(Response<T> response)
     {

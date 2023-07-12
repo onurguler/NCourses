@@ -8,4 +8,6 @@ public interface ICategoryService
     Task<Response<List<CategoryDto>>> GetAllAsync();
     Task<Response<CategoryDto>> GetByIdAsync(string categoryId);
     Task<Response<CategoryDto>> CreateAsync(CategoryCreateDto input);
+    Task<Response<NoContentResponse>> UpdateAsync(CategoryUpdateDto input);
+    Task<Response<NoContentResponse>> DeleteAsync(string categoryId);
 }

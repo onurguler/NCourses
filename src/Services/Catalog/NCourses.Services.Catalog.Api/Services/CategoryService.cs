@@ -49,4 +49,21 @@ public class CategoryService : ICategoryService
         await _categoryCollection.InsertOneAsync(category);
         return Response<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), HttpStatusCode.Created);
     }
+    
+    public async Task<Response<NoContentResponse>> UpdateAsync(CategoryUpdateDto input)
+    {
+        var updateCategory = _mapper.Map<Category>(input);
+        var document = await _categoryCollection.FindOneAndReplaceAsync(p => p.Id == updateCategory.Id, updateCategory);
+        if (document is null)
+            return Response<NoContentResponse>.Fail("Category not found", HttpStatusCode.NotFound);
+        return Response<NoContentResponse>.Success(HttpStatusCode.NoContent);
+    }
+
+    public async Task<Response<NoContentResponse>> DeleteAsync(string categoryId)
+    {
+        var result = await _categoryCollection.DeleteOneAsync(x => x.Id == categoryId);
+        if (result.DeletedCount <= 0)
+            return Response<NoContentResponse>.Fail("Category not found", HttpStatusCode.NotFound);
+        return Response<NoContentResponse>.Success(HttpStatusCode.NoContent);
+    }
 }
