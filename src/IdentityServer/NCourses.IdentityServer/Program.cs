@@ -6,11 +6,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+
 using System;
 using System.Linq;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+using NCourses.IdentityServer.Data;
+using NCourses.IdentityServer.Models;
 
 namespace NCourses.IdentityServer
 {
@@ -32,27 +40,27 @@ namespace NCourses.IdentityServer
                 //    rollOnFileSizeLimit: true,
                 //    shared: true,
                 //    flushToDiskInterval: TimeSpan.FromSeconds(1))
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
+                .WriteTo.Console(
+                    outputTemplate:
+                    "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
+                    theme: AnsiConsoleTheme.Code)
                 .CreateLogger();
 
             try
             {
-                var seed = args.Contains("/seed");
-                if (seed)
-                {
-                    args = args.Except(new[] { "/seed" }).ToArray();
-                }
-
                 var host = CreateHostBuilder(args).Build();
 
-                if (seed)
+                using var scope = host.Services.CreateScope();
+                var serviceProvider = scope.ServiceProvider;
+                var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+
+                var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                if (!userManager.Users.Any())
                 {
-                    Log.Information("Seeding database...");
-                    var config = host.Services.GetRequiredService<IConfiguration>();
-                    var connectionString = config.GetConnectionString("DefaultConnection");
-                    SeedData.EnsureSeedData(connectionString);
-                    Log.Information("Done seeding database.");
-                    return 0;
+                    userManager.CreateAsync(
+                        new ApplicationUser { UserName = "admin", Email = "admin@ncourses.dev", City = "Ankara" },
+                        "Password12*").Wait();
                 }
 
                 Log.Information("Starting host...");
