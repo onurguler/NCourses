@@ -1,6 +1,9 @@
+using NCourses.Services.Basket.Api.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection(nameof(RedisSettings)));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
