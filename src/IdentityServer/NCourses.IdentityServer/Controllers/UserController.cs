@@ -1,6 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using IdentityServer4;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +13,8 @@ using NCourses.Shared.Dtos;
 
 namespace NCourses.IdentityServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
