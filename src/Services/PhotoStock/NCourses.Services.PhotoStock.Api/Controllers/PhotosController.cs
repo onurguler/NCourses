@@ -1,3 +1,5 @@
+using System.Net;
+
 using Microsoft.AspNetCore.Mvc;
 
 using NCourses.Services.PhotoStock.Api.Dtos;
@@ -24,9 +26,22 @@ public class PhotosController : CustomBaseController
         await photo.CopyToAsync(stream, cancellationToken);
 
         var returnPath = "photos/" + photo.FileName;
-        
+
         PhotoDto photoDto = new() { Url = returnPath };
-        
+
         return CreateActionResultInstance(Response<PhotoDto>.Success(photoDto));
+    }
+
+    [HttpDelete]
+    public  IActionResult DeletePhoto([FromBody] string photoUrl)
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
+        if (!System.IO.File.Exists(path))
+            return CreateActionResultInstance(Response<NoContentResponse>.Fail("Photo not found.",
+                HttpStatusCode.NotFound));
+
+        System.IO.File.Delete(path);
+
+        return CreateActionResultInstance(Response<NoContentResponse>.Success(HttpStatusCode.NoContent));
     }
 }
