@@ -26,4 +26,8 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\NCourses.Shared\NCourses.Shared.csproj" />
+  </ItemGroup>
 </Project>
