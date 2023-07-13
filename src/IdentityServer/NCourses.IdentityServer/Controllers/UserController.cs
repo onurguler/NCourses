@@ -6,6 +6,7 @@ using IdentityServer4;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 using NCourses.IdentityServer.Dtos;
 using NCourses.IdentityServer.Models;
@@ -41,6 +42,29 @@ namespace NCourses.IdentityServer.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMe()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
+            if (userIdClaim == null)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.FindByIdAsync(userIdClaim.Value);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            var userDto = new UserDto()
+            {
+                Id = user.Id, UserName = user.UserName, Email = user.Email, City = user.City,
+            };
+
+            return Ok(userDto);
         }
     }
 }

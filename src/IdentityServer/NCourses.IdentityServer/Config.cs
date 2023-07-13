@@ -74,6 +74,7 @@ namespace NCourses.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
+                        IdentityServerConstants.LocalApi.ScopeName,
                         "roles"
                     },
                     AccessTokenLifetime = 1 * 60 * 60,
