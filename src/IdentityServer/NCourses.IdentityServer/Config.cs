@@ -2,10 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using System;
+
 using IdentityServer4.Models;
 
 using System.Collections.Generic;
-using System.Linq;
 
 using IdentityServer4;
 
@@ -22,7 +23,18 @@ namespace NCourses.IdentityServer
             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[] { };
+            new IdentityResource[]
+            {
+                new IdentityResources.Email(), new IdentityResources.OpenId(), new IdentityResources.Profile(),
+                new IdentityResources.Address(),
+                new IdentityResource
+                {
+                    Name = "roles",
+                    DisplayName = "Roles",
+                    Description = "User roles",
+                    UserClaims = new[] { "role" }
+                }
+            };
 
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
@@ -35,7 +47,7 @@ namespace NCourses.IdentityServer
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
-                new Client()
+                new Client
                 {
                     ClientName = "Asp.Net Core MVC Client",
                     ClientId = "WebMvcClient",
@@ -47,6 +59,27 @@ namespace NCourses.IdentityServer
                         "photo_stock_full_permission",
                         IdentityServerConstants.LocalApi.ScopeName
                     }
+                },
+                new Client
+                {
+                    ClientName = "Asp.Net Core MVC Client",
+                    ClientId = "WebMvcClientForUser",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowOfflineAccess = true,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "roles"
+                    },
+                    AccessTokenLifetime = 1 * 60 * 60,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    SlidingRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
                 }
             };
     }
