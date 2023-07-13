@@ -13,6 +13,7 @@ public class RedisService
     {
         _host = host;
         _port = port;
+        _connectionMultiplexer = null!;
     }
 
     public void Connect() =>
