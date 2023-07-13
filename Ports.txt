@@ -1,4 +1,5 @@
 Services
 	- catalogAPI =>  5145
     - photoStockAPI =>  5294
+    - basketAPI =>  5067
 identityServer => 5001
