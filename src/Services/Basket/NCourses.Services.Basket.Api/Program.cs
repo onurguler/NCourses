@@ -2,11 +2,13 @@ using Microsoft.Extensions.Options;
 
 using NCourses.Services.Basket.Api.Configuration;
 using NCourses.Services.Basket.Api.Services;
+using NCourses.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection(nameof(RedisSettings)));
+builder.Services.AddSharedDependencies();
 
 builder.Services.AddSingleton<RedisService>(sp =>
 {
