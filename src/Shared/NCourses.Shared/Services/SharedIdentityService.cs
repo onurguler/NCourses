@@ -11,5 +11,5 @@ public class SharedIdentityService : ISharedIdentityService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public string CurrentUserId => _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == "sub").Value;
+    public string CurrentUserId => _httpContextAccessor.HttpContext?.User?.FindFirst(x => x.Type == "sub")?.Value ?? string.Empty;
 }
