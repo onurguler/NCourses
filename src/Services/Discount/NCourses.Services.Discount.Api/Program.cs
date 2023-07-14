@@ -1,11 +1,41 @@
+using System.IdentityModel.Tokens.Jwt;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+
+using NCourses.Services.Discount.Api.Services;
+using NCourses.Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSharedDependencies();
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 
-builder.Services.AddControllers();
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder()
+    .RequireClaim("sub")
+    .RequireAuthenticatedUser()
+    .Build();
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["IdentityServerURL"];
+        options.Audience = "resource_discount";
+        options.RequireHttpsMetadata = false;
+    });
 
 var app = builder.Build();
 
@@ -16,8 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
