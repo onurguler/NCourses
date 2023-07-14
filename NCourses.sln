@@ -38,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCourses.Services.Order.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCourses.Services.Order.Infrastructure", "src\Services\Order\NCourses.Services.Order.Infrastructure\NCourses.Services.Order.Infrastructure.csproj", "{14CEB629-91C3-4AA5-A158-6BAB6C852A2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCourses.Services.Order.Core", "src\Services\Order\NCourses.Services.Order.Core\NCourses.Services.Order.Core.csproj", "{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCourses.Services.Order.Domain.Core", "src\Services\Order\NCourses.Services.Order.Domain.Core\NCourses.Services.Order.Domain.Core.csproj", "{5B96ECA7-7367-4684-870E-9E6BCBF632F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,10 +86,10 @@ Global
 		{14CEB629-91C3-4AA5-A158-6BAB6C852A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14CEB629-91C3-4AA5-A158-6BAB6C852A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14CEB629-91C3-4AA5-A158-6BAB6C852A2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B96ECA7-7367-4684-870E-9E6BCBF632F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B96ECA7-7367-4684-870E-9E6BCBF632F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B96ECA7-7367-4684-870E-9E6BCBF632F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B96ECA7-7367-4684-870E-9E6BCBF632F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{029B6B02-92B3-4F84-BC55-3F91E6E04CBF} = {83DA1116-F0AC-4B8B-8F64-084A6084F031}
@@ -110,6 +110,6 @@ Global
 		{4D6092FC-CE65-4E46-9B17-0F2D52F991D9} = {7B6F4C9B-D9C2-4D53-92AF-FD39F608A3BA}
 		{6F864DB6-153A-4EAE-8438-44A79727A5AC} = {7B6F4C9B-D9C2-4D53-92AF-FD39F608A3BA}
 		{14CEB629-91C3-4AA5-A158-6BAB6C852A2E} = {7B6F4C9B-D9C2-4D53-92AF-FD39F608A3BA}
-		{6B3416B3-AFB9-49F4-BF3D-DF13FA123B1A} = {7B6F4C9B-D9C2-4D53-92AF-FD39F608A3BA}
+		{5B96ECA7-7367-4684-870E-9E6BCBF632F7} = {7B6F4C9B-D9C2-4D53-92AF-FD39F608A3BA}
 	EndGlobalSection
 EndGlobal
