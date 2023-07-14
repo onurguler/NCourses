@@ -24,6 +24,14 @@ public class DiscountService : IDiscountService
         return Response<List<Models.Discount>>.Success(discounts.ToList());
     }
 
+    public async Task<Response<List<Models.Discount>>> GetAllByUserIdAsync(string userId)
+    {
+        var discounts = await _dbConnection
+            .QueryAsync<Models.Discount>("select * from discounts where userid=@UserId", new { UserId = userId });
+
+        return Response<List<Models.Discount>>.Success(discounts.ToList());
+    }
+
     public async Task<Response<Models.Discount>> GetByIdAsync(int id)
     {
         var discount = await _dbConnection
