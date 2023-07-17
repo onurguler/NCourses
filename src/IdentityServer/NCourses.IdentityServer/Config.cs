@@ -22,6 +22,7 @@ namespace NCourses.IdentityServer
                 new ApiResource("resource_basket") { Scopes = { "basket_full_permission" } },
                 new ApiResource("resource_discount") { Scopes = { "discount_full_permission" } },
                 new ApiResource("resource_order") { Scopes = { "order_full_permission" } },
+                new ApiResource("resource_payment") {Scopes = { "payment_full_permission" }},
                 new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -47,6 +48,7 @@ namespace NCourses.IdentityServer
                 new ApiScope("basket_full_permission", "Full Access for Basket API"),
                 new ApiScope("discount_full_permission", "Full Access for Discount API"),
                 new ApiScope("order_full_permission", "Full Access for Order API"),
+                new ApiScope("payment_full_permission", "Full Access for Payment API"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName),
             };
 
@@ -78,6 +80,7 @@ namespace NCourses.IdentityServer
                         "basket_full_permission",
                         "discount_full_permission",
                         "order_full_permission",
+                        "payment_full_permission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
