@@ -11,6 +11,11 @@ public class Order : Entity, IAggregateRoot
     private readonly List<OrderItem> _orderItems;
     public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
+    private Order()
+    {
+        _orderItems = new List<OrderItem>();
+    }
+    
     public Order(string buyerId, Address address)
     {
         _orderItems = new List<OrderItem>();

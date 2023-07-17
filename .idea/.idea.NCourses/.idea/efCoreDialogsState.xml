@@ -4,9 +4,12 @@
     <option name="keyValueStorage">
       <map>
         <entry key="Common:04ce1862-caae-4794-b837-3341b486d11f:dbContext" value="NCourses.IdentityServer.Data.ApplicationDbContext" />
+        <entry key="Common:14ceb629-91c3-4aa5-a158-6bab6c852a2e:dbContext" value="NCourses.Services.Order.Infrastructure.OrderDbContext" />
         <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:c9dca050-f846-4208-aa9b-cef48a9b944d:dbContext" value="NCourses.Services.Order.Infrastructure.OrderDbContext" />
         <entry key="Common:noBuild" value="false" />
-        <entry key="Common:outputFolder" value="Data/Migrations" />
+        <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:useDefaultConnection" value="true" />
       </map>
     </option>
   </component>
