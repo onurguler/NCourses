@@ -4,4 +4,5 @@ Services
     - basketAPI =>  5067
     - discountAPI => 5212
     - orderAPI =>  5181
+    - paymentAPI =>  5228
 identityServer => 5001
