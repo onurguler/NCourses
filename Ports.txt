@@ -6,3 +6,4 @@ Services
     - orderAPI =>  5181
     - paymentAPI =>  5228
 identityServer => 5001
+gateway => 5000
