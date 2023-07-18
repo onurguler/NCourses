@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 
 using NCourses.Services.Catalog.Api.Configuration;
+using NCourses.Services.Catalog.Api.Dtos;
 using NCourses.Services.Catalog.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+    var categories = await categoryService.GetAllAsync();
+    if (!categories.Data.Any())
+    {
+        await categoryService.CreateAsync(new CategoryCreateDto { Name = "Asp.Net Core" });
+        await categoryService.CreateAsync(new CategoryCreateDto { Name = "React" });
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
