@@ -7,3 +7,4 @@ Services
     - paymentAPI =>  5228
 identityServer => 5001
 gateway => 5000
+Web => 5269
