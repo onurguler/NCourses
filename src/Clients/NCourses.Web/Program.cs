@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(nameof(ServiceApiSettings)));
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection(nameof(ClientSettings)));
 
 builder.Services.AddControllersWithViews();
 
